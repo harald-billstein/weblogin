@@ -1,12 +1,14 @@
 package com.weblogin.filters;
 
 import com.weblogin.database.DatabaseUtil;
-
+import com.weblogin.utilities.PasswordHandler;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -15,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import org.apache.wss4j.dom.util.SignatureUtils;
 
 @WebFilter(filterName = "api-filter", urlPatterns = "/api/*")
 public class ApiFilter implements Filter {
@@ -53,6 +56,28 @@ public class ApiFilter implements Filter {
     }
     //TODO END OF TEST CODE
     //TODO SEND TO PASSWORD USER CHECK!
+    
+    
+    
+    // TODO TESTING PASSWORD HANDLER
+    PasswordHandler passwordHandler = new PasswordHandler();
+    List<String> posHit;
+    try {
+      posHit = passwordHandler.getPossibleMatches("password", "salt");
+      
+      for (int i = 0; i < posHit.size(); i++) {
+        System.out.println(i + "Try: " + posHit.get(i));
+      }
+      
+    } catch (NoSuchAlgorithmException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    // TODO TESTINT PASSWORD HANDLER
+    
+    
+    
+
 
     chain.doFilter(req, resp);
   }
