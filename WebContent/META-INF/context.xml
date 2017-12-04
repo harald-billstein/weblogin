@@ -1,15 +1,14 @@
 <Context>
-<Resource name="jdbc/authorization"
-          global="jdbc/authorization"
-          auth="Container"
-          type="javax.sql.DataSource"
-          driverClassName="com.mysql.jdbc.Driver"
-          url="jdbc:mysql://localhost:3306/authorization"
-          username="root"
-          password=""
-
-          maxActive="100"
-          maxIdle="20"
-          minIdle="5"
-          maxWait="10000"/>
+    <Resource name="jdbc/authorization"
+              global="jdbc/authorization"
+              auth="Container"
+              type="javax.sql.DataSource"
+              driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://localhost:3306/authorization"
+              username="root"
+              password=""
+              maxTotal="8"
+              maxIdle="20"
+              minIdle="5"
+              maxWaitMillis="10000"/>
 </Context>

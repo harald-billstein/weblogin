@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.inject.Inject;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -29,20 +30,31 @@ public class ApiFilter implements Filter {
   public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
       throws IOException, ServletException {
     System.out.println("ApiFilter: doFilter");
+
+    //TODO TEST CODE BELOW
     DatabaseUtil db = new DatabaseUtil();
-    Connection connection = db.getConnection();
-    try {
-      PreparedStatement ps = connection.prepareStatement("SELECT * FROM user;");
+    PreparedStatement ps = null;
+    try(Connection connection = db.getConnection()){
+      ps = connection.prepareStatement("SELECT * FROM user;");
       ResultSet rs = ps.executeQuery();
       while (rs.next()) {
         System.out.println(rs.getString(1));
       }
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      if(ps != null) {
+        try {
+          ps.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+      }
     }
+    //TODO END OF TEST CODE
+    //TODO SEND TO PASSWORD USER CHECK!
 
-    // TODO Auto-generated method stub
-
+    chain.doFilter(req, resp);
   }
 
   @Override
