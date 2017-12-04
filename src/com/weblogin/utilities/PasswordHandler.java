@@ -49,7 +49,27 @@ public class PasswordHandler implements Serializable {
     return sb.toString();
   }
 
-  public void shuffle() {
+  public String createHashedPassword(String password, String salt) {
+    String saltedPassword = addSalt(salt, password);
+    String pepperdPassword = addPepper(saltedPassword);
+    String hashedPassword = null;
+
+    try {
+      hashedPassword = getHasched(pepperdPassword);
+    } catch (NoSuchAlgorithmException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+
+    return hashedPassword;
+  }
+
+  private String addPepper(String salted) {
+    shuffle();
+    return salted + alphabetString.substring(0, 1);
+  }
+
+  private void shuffle() {
 
     List<Character> characters = new ArrayList<Character>();
 
@@ -67,76 +87,3 @@ public class PasswordHandler implements Serializable {
     alphabetString = shuffledString.toString();
   }
 }
-
-
-
-// public String hasher(String username, String password) {
-//
-// String salted = addSalt(username, password);
-// String peppered = addPepper(salted);
-// String hasched = null;
-// try {
-// hasched = getHasched(peppered);
-// } catch (NoSuchAlgorithmException e) {
-// e.printStackTrace();
-// }
-// return hasched;
-// }
-//
-// private String getHasched(String pepper) throws NoSuchAlgorithmException {
-//
-// MessageDigest md = MessageDigest.getInstance("SHA-256");
-// md.update(pepper.getBytes());
-//
-// byte byteData[] = md.digest();
-// StringBuffer sb = new StringBuffer();
-//
-// for (int i = 0; i < byteData.length; i++) {
-// sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
-// }
-//
-// return sb.toString();
-// }
-//
-// private String addSalt(String username, String password) {
-// return password + username.substring(0, 4);
-// }
-//
-// private String addPepper(String salted) {
-// return salted + alphabetString.substring(0, 1);
-// }
-//
-// public List<String> getPossibleMatches(User user) throws NoSuchAlgorithmException {
-// shuffle();
-// List<String> posMatches = new ArrayList<>();
-//
-// int index = 0;
-// for (int i = 0; i < alphabetString.length(); i++) {
-// String buildingPosHash = addSalt(user.getUserName(), user.getPassword());
-// buildingPosHash += alphabetString.substring(index, (index + 1));
-// buildingPosHash = getHasched(buildingPosHash);
-// posMatches.add(buildingPosHash);
-// index++;
-// }
-// return posMatches;
-// }
-//
-// public void shuffle() {
-//
-// List<Character> characters = new ArrayList<Character>();
-//
-// for (char c : alphabetString.toCharArray()) {
-// characters.add(c);
-// }
-//
-// StringBuilder shuffledString = new StringBuilder(alphabetString.length());
-//
-// while (characters.size() != 0) {
-// int randPicker = (int) (Math.random() * characters.size());
-// shuffledString.append(characters.remove(randPicker));
-// }
-//
-// alphabetString = shuffledString.toString();
-// }
-// }
-

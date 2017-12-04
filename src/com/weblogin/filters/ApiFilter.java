@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import javax.inject.Inject;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -17,7 +16,6 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
-import org.apache.wss4j.dom.util.SignatureUtils;
 
 @WebFilter(filterName = "api-filter", urlPatterns = "/api/*")
 public class ApiFilter implements Filter {
@@ -73,6 +71,12 @@ public class ApiFilter implements Filter {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
+    
+    System.out.println();
+    System.out.println("GENERATED HASHE" + passwordHandler.createHashedPassword("password", "salt"));
+    
+    
+    
     // TODO TESTINT PASSWORD HANDLER
     
     

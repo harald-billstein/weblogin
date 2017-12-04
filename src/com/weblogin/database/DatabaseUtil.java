@@ -1,6 +1,5 @@
 package com.weblogin.database;
 
-import javax.inject.Singleton;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;

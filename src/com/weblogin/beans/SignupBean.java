@@ -37,23 +37,64 @@ public class SignupBean {
     }
   }
 
-//  public void validatePassword(FacesContext context, UIComponent component, Object value)
-//      throws ValidatorException {
-//    System.out.println("SignupBean: validatePassword()");
-//    FacesMessage message;
-//    
-//    System.out.println("password: " + this.password + " Confirm password: " + this.confirmPassword);
-//    
-//    if (this.confirmPassword == null) {
-//      message = new FacesMessage("Fill out a password!");
-//      throw new ValidatorException(message);
-//    }
-//
-//    if (!this.password.equals(this.confirmPassword)) {
-//      message = new FacesMessage("Password did not match!");
-//      throw new ValidatorException(message);
-//    }
-//  }
+  public void validateName(FacesContext context, UIComponent component, Object value)
+      throws ValidatorException {
+    String input = value.toString();
+
+    for (char c : input.toCharArray()) {
+
+      if (Character.isWhitespace(c)) {
+        FacesMessage message = new FacesMessage("White spaces not allowed in name");
+        throw new ValidatorException(message);
+      }
+
+    }
+
+    if (input.length() < 2) {
+      FacesMessage message = new FacesMessage("Name is to short!");
+      throw new ValidatorException(message);
+    }
+
+  }
+  
+  public void validatePassword(FacesContext context, UIComponent component, Object value)
+      throws ValidatorException {
+    String input = value.toString();
+
+    for (char c : input.toCharArray()) {
+
+      if (Character.isWhitespace(c)) {
+        FacesMessage message = new FacesMessage("White spaces not allowed in name");
+        throw new ValidatorException(message);
+      }
+
+    }
+
+    if (input.length() < 6) {
+      FacesMessage message = new FacesMessage("Name is to short!");
+      throw new ValidatorException(message);
+    }
+
+  }
+
+  // public void validatePassword(FacesContext context, UIComponent component, Object value)
+  // throws ValidatorException {
+  // System.out.println("SignupBean: validatePassword()");
+  // FacesMessage message;
+  //
+  // System.out.println("password: " + this.password + " Confirm password: " +
+  // this.confirmPassword);
+  //
+  // if (this.confirmPassword == null) {
+  // message = new FacesMessage("Fill out a password!");
+  // throw new ValidatorException(message);
+  // }
+  //
+  // if (!this.password.equals(this.confirmPassword)) {
+  // message = new FacesMessage("Password did not match!");
+  // throw new ValidatorException(message);
+  // }
+  // }
 
   public String getUserName() {
     return userName;
