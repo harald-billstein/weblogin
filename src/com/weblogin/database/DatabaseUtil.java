@@ -21,7 +21,6 @@ public class DatabaseUtil {
             context = new InitialContext();
             dataSource = (DataSource) context.lookup(jndiLookup);
             connection = dataSource.getConnection();
-
         } catch (NamingException | SQLException e) {
             e.printStackTrace();
         }
