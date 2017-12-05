@@ -16,7 +16,7 @@ public class LoginBean {
   
   public String signIn() {
     System.out.println("LoginBean: signIn()");
-    System.out.println(toString());
+    
     // TODO send to profile, let filter handle if user is not logged in and redirect back to login
     return "profile";
   }
