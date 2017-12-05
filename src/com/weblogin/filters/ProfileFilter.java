@@ -1,6 +1,10 @@
 package com.weblogin.filters;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -10,6 +14,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.JSONObject;
 
 @WebFilter(filterName = "profile-filter", urlPatterns = "/profile.xhtml")
 public class ProfileFilter implements Filter {
@@ -24,13 +29,42 @@ public class ProfileFilter implements Filter {
     HttpServletResponse response = (HttpServletResponse) resp;
     HttpServletRequest request = (HttpServletRequest) req;
 
-    // TODO ture:false if user has token.
-    // TODO check if token is valid (Ask API)
-    // TODO send user depending on token
-    
-
-
     Boolean accessGranted = false;
+    String link = null;
+    URL url;
+    HttpURLConnection connection = null;
+
+    String username = (String) request.getAttribute("username");
+    String password = (String) request.getAttribute("password");
+
+    if (username == null || password == null) {
+      accessGranted = false;
+    } else {
+      link = "http://localhost:8080/LoginApi/api/login/" + username;
+      url = new URL(link);
+      connection = (HttpURLConnection) url.openConnection();
+      connection.setRequestMethod("GET");
+      connection.setRequestProperty("password", "password");
+    }
+
+
+    if (connection != null && connection.getResponseCode() == 200) {
+      request.setAttribute("token", "token");
+
+      BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+      String output;
+      while ((output = br.readLine()) != null) {
+        System.out.println(output);
+        JSONObject jsonObj = new JSONObject(output);
+        String token = (String) jsonObj.get("token");
+        System.out.println(token);
+        accessGranted = true;
+      }
+    } else {
+      accessGranted = false;
+
+    }
 
     if (accessGranted) {
       // TODO user access accepted
