@@ -1,13 +1,14 @@
 package com.weblogin.filters;
 
 import com.weblogin.database.DatabaseUtil;
-
+import com.weblogin.utilities.PasswordHandler;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.inject.Inject;
+import java.util.List;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -38,7 +39,7 @@ public class ApiFilter implements Filter {
       ps = connection.prepareStatement("SELECT * FROM user;");
       ResultSet rs = ps.executeQuery();
       while (rs.next()) {
-        System.out.println(rs.getString(1));
+        System.out.println("id:" + rs.getString(1) + " username: " + rs.getString(2) + " " + rs.getString(3) + " hash: " + rs.getString(4) );
       }
     } catch (SQLException e) {
       e.printStackTrace();
@@ -53,6 +54,34 @@ public class ApiFilter implements Filter {
     }
     //TODO END OF TEST CODE
     //TODO SEND TO PASSWORD USER CHECK!
+    
+    
+    
+    // TODO TESTING PASSWORD HANDLER
+    PasswordHandler passwordHandler = new PasswordHandler();
+    List<String> posHit;
+    try {
+      posHit = passwordHandler.getPossibleMatches("password", "salt");
+      
+      for (int i = 0; i < posHit.size(); i++) {
+        System.out.println(i + "Try: " + posHit.get(i));
+      }
+      
+    } catch (NoSuchAlgorithmException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    
+    System.out.println();
+    System.out.println("GENERATED HASHE" + passwordHandler.createHashedPassword("password", "salt"));
+    
+    
+    
+    // TODO TESTINT PASSWORD HANDLER
+    
+    
+    
+
 
     chain.doFilter(req, resp);
   }

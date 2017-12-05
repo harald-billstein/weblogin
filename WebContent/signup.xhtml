@@ -18,33 +18,29 @@
 
 				<h:outputLabel value="Username: " />
 				<h:inputText id="regusername" p:placeholder="pick a username!"
-					value="#{signupBean.userName}" validatorMessage="Username missing or too short!">
-					<f:validateLength minimum="6" maximum="24" />
+					value="#{signupBean.userName}" validator="#{signupBean.validateName}">
 				</h:inputText>
 				<h:message for="regusername" styleClass="error" />
 				
 
 				<h:outputLabel value="First name: " />
 				<h:inputText id="regfirstname" p:placeholder="Your firstname?"
-					value="#{signupBean.firstName}" validatorMessage="Firstname missing or too short!">
-					<f:validateLength minimum="6" maximum="24" />
+					value="#{signupBean.firstName}" validator="#{signupBean.validateName}">
 				</h:inputText>
 				<h:message for="regfirstname" styleClass="error" />
 				
 
 				<h:outputLabel value="Last name: " />
 				<h:inputText id="reglastname" p:placeholder="Your lastname?"
-					value="#{signupBean.lastName}" validatorMessage="Lastname missing or too short!">
-					<f:validateLength minimum="6" maximum="24" />
+					value="#{signupBean.lastName}" validator="#{signupBean.validateName}">
 				</h:inputText>
 				<h:message for="reglastname" styleClass="error" />
 
 
 				<h:outputLabel value="Password: " />
-				<h:inputText id="regpassword" p:placeholder="pick a password!"
-					value="#{signupBean.password}" validatorMessage="Password missing or too short!">
-					<f:validateLength minimum="6" maximum="24" />
-				</h:inputText>
+				<h:inputSecret id="regpassword" p:placeholder="pick a password!"
+					value="#{signupBean.password}" validator="#{signupBean.validatePassword}">
+				</h:inputSecret>
 				<h:message for="regpassword" styleClass="error" />
 
 
