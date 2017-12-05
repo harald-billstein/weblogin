@@ -39,7 +39,7 @@ public class ApiFilter implements Filter {
       ps = connection.prepareStatement("SELECT * FROM user;");
       ResultSet rs = ps.executeQuery();
       while (rs.next()) {
-        System.out.println(rs.getString(1));
+        System.out.println("id:" + rs.getString(1) + " username: " + rs.getString(2) + " " + rs.getString(3) + " hash: " + rs.getString(4) );
       }
     } catch (SQLException e) {
       e.printStackTrace();
