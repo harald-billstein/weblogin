@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -34,49 +36,44 @@ public class ProfileFilter implements Filter {
     URL url;
     HttpURLConnection connection = null;
 
-    String username = (String) request.getAttribute("username");
-    String password = (String) request.getAttribute("password");
+    String username = (String) request.getSession().getAttribute("username");
+    String token = (String) request.getSession().getAttribute("token");
 
-    if (username == null || password == null) {
+    System.out.println("Username from session: " + username);
+    System.out.println("Token from session: " + token);
+
+    if (username == null || token == null) {
       accessGranted = false;
     } else {
-      link = "http://localhost:8080/LoginApi/api/login/" + username;
+      link = "http://localhost:8080/LoginApi/api/validate/" + username + "/" + token;
       url = new URL(link);
       connection = (HttpURLConnection) url.openConnection();
       connection.setRequestMethod("GET");
-      connection.setRequestProperty("password", "password");
-    }
 
+      if (connection.getResponseCode() == 200) {
 
-    if (connection != null && connection.getResponseCode() == 200) {
-      request.setAttribute("token", "token");
-
-      BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-
-      String output;
-      while ((output = br.readLine()) != null) {
-        System.out.println(output);
-        JSONObject jsonObj = new JSONObject(output);
-        String token = (String) jsonObj.get("token");
-        System.out.println(token);
-        accessGranted = true;
+        BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        String output;
+        while ((output = br.readLine()) != null) {
+          System.out.println("Response" + output);
+          JSONObject jsonObj = new JSONObject(output);
+          accessGranted = (Boolean) jsonObj.get("userTokenValid");
+          System.out.println(accessGranted);
+        }
+      } else {
+        System.out.println("Session expired!");
+        accessGranted = false;
       }
-    } else {
-      accessGranted = false;
-
     }
 
     if (accessGranted) {
-      // TODO user access accepted
       chain.doFilter(req, resp);
 
     } else {
-      // TODO user access denied
       response.sendRedirect("login.xhtml");
     }
 
   }
-
 
   @Override
   public void destroy() {
