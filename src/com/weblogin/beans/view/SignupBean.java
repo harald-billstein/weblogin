@@ -1,4 +1,4 @@
-package com.weblogin.beans;
+package com.weblogin.beans.view;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,7 +12,9 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 import org.json.JSONObject;
+import com.weblogin.beans.UserSignupBean;
 
 @RequestScoped
 @Named
@@ -39,7 +41,7 @@ public class SignupBean {
     BufferedReader reader;
     boolean registrationSuccess = false;
 
-    UserSignupBean user;
+    UserSignupBean user = null;
     JSONObject jsonOut;
     JSONObject jsonIn = null;
 
@@ -57,6 +59,7 @@ public class SignupBean {
       
       writer = new OutputStreamWriter(connection.getOutputStream());
       writer.write(jsonOut.toString());
+      System.out.println(jsonOut.toString());
       writer.close();
       responseCode = connection.getResponseCode();
     } catch (IOException e) {
@@ -77,7 +80,7 @@ public class SignupBean {
         
         System.out.println("json lenght: " + jsonIn.length());
         
-        registrationSuccess = (boolean) jsonIn.get("userTokenValid");
+        registrationSuccess = (boolean) jsonIn.get("registerd");
         System.out.println(registrationSuccess);
       }
     } catch (IOException e) {
@@ -88,6 +91,12 @@ public class SignupBean {
       // TODO set token to session
       String token = (String) jsonIn.get("token");
       System.out.println(token);
+      
+      FacesContext context = FacesContext.getCurrentInstance();
+      HttpSession session = (HttpSession) context.getExternalContext().getSession(true);
+
+      session.setAttribute("username", user.getUserName());
+      session.setAttribute("token", token);
       
       navigationLink = "profile";
     } else {
@@ -108,7 +117,8 @@ public class SignupBean {
     UserSignupBean user = new UserSignupBean();
     user.setUserName(userName);
     user.setFirstName(firstName);
-    user.setPassword(confirmPassword);
+    user.setLastName(lastName);
+    user.setPassword(password);
     user.setEmail(email);
     return user;
   }

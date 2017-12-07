@@ -1,4 +1,4 @@
-package com.weblogin.beans;
+package com.weblogin.beans.view;
 
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
