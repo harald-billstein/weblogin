@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import javax.inject.Inject;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -15,12 +16,15 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
+import com.weblogin.beans.view.ProfileBean;
 
 @WebFilter(filterName = "profile-filter", urlPatterns = "/profile.xhtml")
 public class ProfileFilter implements Filter {
 
-
-
+  @Inject
+  private ProfileBean profileBean;
+  private String username;
+  
   @Override
   public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
       throws IOException, ServletException {
@@ -34,7 +38,7 @@ public class ProfileFilter implements Filter {
     URL url;
     HttpURLConnection connection = null;
 
-    String username = (String) request.getSession().getAttribute("username");
+    username = (String) request.getSession().getAttribute("username");
     String token = (String) request.getSession().getAttribute("token");
 
     System.out.println("Username from session: " + username);
@@ -65,6 +69,7 @@ public class ProfileFilter implements Filter {
     }
 
     if (accessGranted) {
+      profileBean.setUsername(username);
       chain.doFilter(req, resp);
 
     } else {
