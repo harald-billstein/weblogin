@@ -3,7 +3,8 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+>
 
 <ui:composition template="/WEB-INF/templete/templete.xhtml">
 	<ui:define name="content">
@@ -21,14 +22,14 @@
 					value="#{signupBean.userName}" validator="#{signupBean.validateName}">
 				</h:inputText>
 				<h:message for="regusername" styleClass="error" />
-				
+
 
 				<h:outputLabel value="First name: " />
 				<h:inputText id="regfirstname" p:placeholder="Your firstname?"
 					value="#{signupBean.firstName}" validator="#{signupBean.validateName}">
 				</h:inputText>
 				<h:message for="regfirstname" styleClass="error" />
-				
+
 
 				<h:outputLabel value="Last name: " />
 				<h:inputText id="reglastname" p:placeholder="Your lastname?"
@@ -51,7 +52,7 @@
 				<h:message for="regemail" styleClass="error" />
 
 				<h:commandButton value="Signup..." action="#{signupBean.signup()}" />
-				
+
 			</h:panelGrid>
 		</h:form>
 	</ui:define>

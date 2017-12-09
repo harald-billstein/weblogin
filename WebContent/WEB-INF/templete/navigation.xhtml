@@ -6,7 +6,7 @@
 <div class="navigation">
 	<h:panelGrid columns="3" class="navigation">
 		<h:form>
-			<ui:repeat value="#{navigationItems.items}" var="item">	
+			<ui:repeat value="#{navigationItems.items}" var="item">
 				<h:link class="navigationitem" value="#{item.name}"
 					outcome="#{item.url}" />
 			</ui:repeat>

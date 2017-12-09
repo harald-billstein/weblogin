@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+
+<ui:composition template="/WEB-INF/templete/templete.xhtml">
+    <ui:define name="content">
+        <h:head>
+            <title><ui:insert name="title">gallery</ui:insert></title>
+        </h:head>
+
+        <h:form enctype="multipart/form-data">
+            <p:growl id="messages" showDetail="true"/>
+            <p:fileUpload value="#{fileUploadVIew.file}" mode="simple" skinSimple="true"/>
+            <p:commandButton value="Submit" ajax="false"
+                             actionListener="#{fileUploadVIew.uploadFile}" disabled="false"/>
+        </h:form>
+    <!--    <h:form class="content">
+
+        <h:panelGrid columns="3" >
+            <c:forEach var="item" items="#{imagesView.images}">
+                <p:graphicImage onclick="#{item}" value="#{item}" />
+            </c:forEach>
+
+        </h:panelGrid>
+
+
+        </h:form>
+        <p:galleria value="#{imagesView.images}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
+            <p:graphicImage url="#{image}" alt="Image Description for #{image}" title="#{image}"/>
+        </p:galleria>
+        -->
+
+        <h:form id="image_from" style="width: 1300px; height: 500px">
+            <p:dataGrid var="item" value="#{imagesView.images}" columns="3" rows="3" layout="grid"
+                         paginator="true" id="img_G"
+                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        rowsPerPageTemplate="6,9,12">
+                <p:panel header="#{item.owner}">
+                    <h:panelGrid columns="1" style="width: 100%">
+                    <p:commandLink update=":image_from:display" oncomplete="PF('dlg').show()">
+                        <f:setPropertyActionListener value="#{item}" target="#{imagesView.selectedImage}" />
+                        <p:graphicImage url="#{item.reference}"  />
+                        <h:outputText value="#{item.description}" />
+                    </p:commandLink>
+                </h:panelGrid>
+                </p:panel>
+            </p:dataGrid>
+            <p:dialog modal="true" widgetVar="dlg">
+                <h:panelGrid id="display" columns="2">
+                    <f:facet name="header">
+                        <p:graphicImage url="#{imagesView.selectedImage.reference}" />
+                    </f:facet>
+                    <h:outputText value="#{imagesView.selectedImage.description} " />
+                    <h:outputText value="Owner: #{imagesView.selectedImage.description} " />
+                </h:panelGrid>
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>
