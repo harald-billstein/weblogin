@@ -16,7 +16,7 @@ public class ImageServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) {
     String imageReference = request.getParameter("image");
-
+    System.out.println(imageReference);
     try {
 
       Class.forName("com.mysql.jdbc.Driver");
@@ -41,5 +41,6 @@ public class ImageServlet extends HttpServlet {
       e.printStackTrace();
       System.out.println("IN CATCH");
     }
+    System.out.println("Servlet end");
   }
 }

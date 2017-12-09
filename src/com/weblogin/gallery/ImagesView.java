@@ -3,9 +3,7 @@ package com.weblogin.gallery;
 
 
 import com.weblogin.gallery.beans.ImageBean;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
+
 import java.io.Serializable;
 
 import java.sql.Connection;
@@ -16,15 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 
-
-import javax.enterprise.context.ConversationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 @Named
-@ConversationScoped
+@SessionScoped
 public class ImagesView implements Serializable{
 
-  private final String path = "http://localhost:8080/img/t.jpg";
   private List<ImageBean> images;
   private ImageBean selectedImage;
 
@@ -32,7 +28,7 @@ public class ImagesView implements Serializable{
   public void init() {
     images = new ArrayList<>();
     getPictures();
-    System.out.println("Construct ImageHandler");
+    System.out.println("Construct ImageView");
 
   }
 
@@ -58,6 +54,7 @@ public class ImagesView implements Serializable{
       ps.setBoolean(1, true);
       ResultSet rs = ps.executeQuery();
       while (rs.next()) {
+        System.out.println("loading img");
         images.add(new ImageBean(rs.getString("owner"),
             rs.getString("reference"), rs.getString("description")));
       }
