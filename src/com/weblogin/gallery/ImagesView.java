@@ -3,8 +3,15 @@ package com.weblogin.gallery;
 
 
 import com.weblogin.gallery.beans.ImageBean;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.io.Serializable;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -24,17 +31,7 @@ public class ImagesView implements Serializable{
   @PostConstruct
   public void init() {
     images = new ArrayList<>();
-    images.add(new ImageBean("Stefan","t.jpg", "Lalaland"));
-    images.add(new ImageBean("Normal","t.jpg", "Lalaland"));
-    images.add(new ImageBean("Stefan","t.jpg", "Lalaland"));
-    images.add(new ImageBean("Stefan","t.jpg", "Lalaland"));
-    images.add(new ImageBean("Stefan","t.jpg", "Lalaland"));
-    images.add(new ImageBean("Stefan","t.jpg", "Lalaland"));
-    images.add(new ImageBean("Stefan","t.jpg", "Lalaland"));
-    images.add(new ImageBean("Stefan","t.jpg", "Lalaland"));
-    images.add(new ImageBean("Stefan","t.jpg", "Lalaland"));
-    images.add(new ImageBean("Stefan","t.jpg", "Lalaland"));
-
+    getPictures();
     System.out.println("Construct ImageHandler");
 
   }
@@ -49,5 +46,25 @@ public class ImagesView implements Serializable{
 
   public void setSelectedImage(ImageBean selectedImage) {
     this.selectedImage = selectedImage;
+  }
+  private void getPictures() {
+    try {
+
+      Class.forName("com.mysql.jdbc.Driver");
+      Connection connection = DriverManager
+          .getConnection("jdbc:mysql://localhost/WebResources?user=root&password=");
+      PreparedStatement ps = connection
+          .prepareStatement("SELECT owner, reference, description FROM images WHERE public=?;");
+      ps.setBoolean(1, true);
+      ResultSet rs = ps.executeQuery();
+      while (rs.next()) {
+        images.add(new ImageBean(rs.getString("owner"),
+            rs.getString("reference"), rs.getString("description")));
+      }
+      connection.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.out.println("IN CATCH");
+    }
   }
 }

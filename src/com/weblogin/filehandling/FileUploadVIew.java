@@ -3,6 +3,7 @@ package com.weblogin.filehandling;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.util.UUID;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.primefaces.model.UploadedFile;
@@ -28,11 +29,12 @@ public class FileUploadVIew implements Serializable {
         Class.forName("com.mysql.jdbc.Driver");
         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/WebResources?user=root&password=");
         connection.setAutoCommit(false);
-        PreparedStatement statement = connection.prepareStatement("INSERT INTO images (owner, img, public) VALUES (?, ?, ?);");
-        statement.setString(1, file.getFileName());
-        statement.setBinaryStream(2, file.getInputstream());
-        statement.setBoolean(3,true);
-        statement.executeUpdate();
+        PreparedStatement ps = connection.prepareStatement("INSERT INTO images (owner, img, public, reference) VALUES (?, ?, ?, ?);");
+        ps.setString(1, file.getFileName());
+        ps.setBinaryStream(2, file.getInputstream());
+        ps.setBoolean(3,true);
+        ps.setString(4, UUID.randomUUID().toString().replace("-", ""));
+        ps.executeUpdate();
 
         connection.commit();
         connection.close();
