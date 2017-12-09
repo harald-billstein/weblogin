@@ -32,7 +32,7 @@ public class NavigationItems {
     items.add(new Item("Login", LOGIN_PATH, false));
     items.add(new Item("Signup", SIGNUP_PATH, false));
     items.add(new Item("Profile", PROFILE_PATH, true));
-    items.add(new Item("Gallery", GALLARY_PATH, true));
+    items.add(new Item("Gallery", GALLARY_PATH, false));
   }
 
   public List<Item> getItems() {
