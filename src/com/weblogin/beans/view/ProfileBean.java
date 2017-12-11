@@ -4,7 +4,6 @@ import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 @SessionScoped
@@ -31,13 +30,11 @@ public class ProfileBean implements Serializable {
   }
 
   public String getUsername() {
-    System.out.println("ProfileBean: getUsername");
     return username;
   }
 
   public void setUsername(String username) {
     this.username = username;
-    System.out.println("ProfileBean: setUsername" + this.username);
   }
 
   public String getPassword() {
