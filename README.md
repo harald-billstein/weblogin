@@ -48,7 +48,7 @@ Add additional notes about how to deploy this on a live system
 ## Authors
 
 * **Harald Billstein** - *school project* - [Git link](https://github.com/harald-billstein)
-* **Stefan Löön** - *school project* - [Git link](https://github.com/sdlonn)
+* **Stefan Lönn** - *school project* - [Git link](https://github.com/sdlonn)
 
 ## License
 
