@@ -17,14 +17,15 @@
 
 		<h:form class="content">
 			<h:panelGrid columns="3">
-				<h:outputLabel value="Username: " />
+				<h:outputText value="Username: " />
 				<h:inputText id="username" p:placeholder="Whats your username?"
 					value="#{loginBean.username}" required="true"
 					requiredMessage="Username missing!" />
 
 				<h:message for="username" styleClass="error"></h:message>
+				
 
-				<h:outputLabel value="password: " />
+				<h:outputText value="password: " />
 				<h:inputSecret id="password" p:placeholder="Whats your password?"
 					value="#{loginBean.password}" required="true"
 					requiredMessage="Password missing!" />
@@ -35,16 +36,8 @@
 				<h:commandButton value="Login..." action="#{loginBean.signIn()}" />
 				<h:button value="Sign up!" outcome="signup" />
 
-
 			</h:panelGrid>
 		</h:form>
-
-
-
-
-
-
-
 	</ui:define>
 </ui:composition>
 </html>

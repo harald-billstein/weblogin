@@ -17,35 +17,35 @@
 			<h:messages globalOnly="true" />
 				<h:panelGrid columns="3">
 
-				<h:outputLabel value="Username: " />
+				<h:outputText value="Username: " />
 				<h:inputText id="regusername" p:placeholder="pick a username!"
 					value="#{signupBean.userName}" validator="#{signupBean.validateName}">
 				</h:inputText>
 				<h:message for="regusername" styleClass="error" />
 
 
-				<h:outputLabel value="First name: " />
+				<h:outputText value="First name: " />
 				<h:inputText id="regfirstname" p:placeholder="Your firstname?"
 					value="#{signupBean.firstName}" validator="#{signupBean.validateName}">
 				</h:inputText>
 				<h:message for="regfirstname" styleClass="error" />
 
 
-				<h:outputLabel value="Last name: " />
+				<h:outputText value="Last name: " />
 				<h:inputText id="reglastname" p:placeholder="Your lastname?"
 					value="#{signupBean.lastName}" validator="#{signupBean.validateName}">
 				</h:inputText>
 				<h:message for="reglastname" styleClass="error" />
 
 
-				<h:outputLabel value="Password: " />
+				<h:outputText value="Password: " />
 				<h:inputSecret id="regpassword" p:placeholder="pick a password!"
 					value="#{signupBean.password}" validator="#{signupBean.validatePassword}">
 				</h:inputSecret>
 				<h:message for="regpassword" styleClass="error" />
 
 
-				<h:outputLabel value="Email: " />
+				<h:outputText value="Email: " />
 				<h:inputText id="regemail" p:placeholder="Whats your email?"
 					value="#{signupBean.email}" validator="#{signupBean.validateEmail}">
 				</h:inputText>

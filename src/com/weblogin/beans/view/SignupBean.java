@@ -153,22 +153,18 @@ public class SignupBean {
   }
 
   public String getPassword() {
-    System.out.println("get password");
     return password;
   }
 
   public void setPassword(String password) {
-    System.out.println("set password");
     this.password = password;
   }
 
   public String getConfirmPassword() {
-    System.out.println("get confirmedpassword");
     return confirmPassword;
   }
 
   public void setConfirmPassword(String repeatPassword) {
-    System.out.println("set confirmed password");
     this.confirmPassword = repeatPassword;
   }
 
