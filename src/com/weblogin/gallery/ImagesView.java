@@ -29,7 +29,7 @@ public class ImagesView implements Serializable{
   public void init() {
     images = new ArrayList<>();
     loadPictures();
-    System.out.println("Construct ImageView");
+    System.out.println("Construct ImageView..");
 
   }
 
