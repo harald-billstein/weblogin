@@ -51,7 +51,6 @@ public class NavigationItems {
     if (path.equals("/profile.xhtml") || path.equals("/gallery.xhtml")) {
       // USER LOGGED IN
       for (Item item : items) {
-        System.out.println(item.getUrl());
         if (item.isIsloggedinAccessable() == null || item.isIsloggedinAccessable()) {
           navigationItems.add(item);
         }

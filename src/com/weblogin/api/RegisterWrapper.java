@@ -73,7 +73,7 @@ public class RegisterWrapper {
       HttpSession session = (HttpSession) context.getExternalContext().getSession(true);
       session.setAttribute("username", user.getUserName());
       session.setAttribute("token", token);
-      navigationLink = "profile";
+      navigationLink = "profile?faces-redirect=true";
     } else {
       addErrorMessages("ERROR IN SIGNUP!");
       navigationLink = "signup";

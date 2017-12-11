@@ -77,6 +77,7 @@ public class ProfileFilter implements Filter {
     }
 
     if (accessGranted) {
+      System.out.println("Username set to profileBean: " + username);
       profileBean.setUsername(username);
       chain.doFilter(req, resp);
     } else {
