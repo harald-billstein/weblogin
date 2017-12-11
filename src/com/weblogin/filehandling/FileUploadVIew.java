@@ -4,15 +4,18 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.util.UUID;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import java.io.Serializable;
 
 @Named
-@RequestScoped
+@SessionScoped
 public class FileUploadVIew implements Serializable {
 
   private static final long serialVersionUID = -4549343884187952L;
@@ -22,8 +25,10 @@ public class FileUploadVIew implements Serializable {
     System.out.println("FileUploadView init");
   }
 
-  public void uploadFile() {
-    System.out.println(file.getFileName().toString());
+  public void uploadFile(FileUploadEvent event) {
+    System.out.println("F Event");
+    file = event.getFile();
+    System.out.println("Upload event" + file.getFileName().toString());
 
       try {
         Class.forName("com.mysql.jdbc.Driver");

@@ -11,54 +11,41 @@
         <h:head>
             <title><ui:insert name="title">gallery</ui:insert></title>
         </h:head>
-        <h:form enctype="multipart/form-data">
-            <p:growl id="messages" showDetail="true"/>
-            <p:fileUpload rendered="#{not empty profileBean.username}" value="#{fileUploadVIew.file}" mode="simple" skinSimple="true"/>
-            <p:commandButton rendered="#{not empty profileBean.username}" value="Submit" ajax="false"
-                             actionListener="#{fileUploadVIew.uploadFile}" disabled="false"/>
-        </h:form>
-
-        <!--
-            Galleria from primefaces
-         <h:form class="content">
-            <h:panelGrid columns="3" >
-                <c:forEach var="item" items="#{imagesView.images}">
-                    <p:graphicImage onclick="#{item}" value="#{item}" />
-                </c:forEach>
-            </h:panelGrid>
+        <h:body>
+            <h:form id="form" enctype="multipart/form-data">
+                <p:growl id="msg" showDetail="true"/>
+                <p:fileUpload fileUploadListener="#{fileUploadVIew.uploadFile}"
+                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/" update="msg" multiple="false" sizeLimit="6000000"
+                              description="Select Images"/>
             </h:form>
-            <p:galleria value="#{imagesView.images}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
-                <p:graphicImage url="#{image}" alt="Image Description for #{image}" title="#{image}"/>
-            </p:galleria>
-            -->
-
-        <h:form id="image_form">
-            <p:dataGrid var="item" value="#{imagesView.images}" columns="3" rows="3" layout="grid"
-                        paginator="true" id="img_G"
-                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
+            <h:form id="image_form">
+                <p:dataGrid var="item" value="#{imagesView.images}" columns="3" rows="3" layout="grid"
+                            paginator="true" id="img_G"
+                            paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
                          {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                        rowsPerPageTemplate="3,6,9,12">
-                <p:panel header="#{item.owner}" style="width: 100%; height: 100%;">
-                    <h:panelGrid columns="1">
-                        <p:commandLink update=":image_form:display" oncomplete="PF('dlg').show()">
-                            <f:setPropertyActionListener value="#{item}"
-                                                         target="#{imagesView.selectedImage}"/>
-                            <p:graphicImage url="#{item.reference}" style="width: 100%; "/>
-                            <h:outputText value="#{item.description}"/>
-                        </p:commandLink>
+                            rowsPerPageTemplate="3,6,9,12">
+                    <p:panel header="#{item.owner}" style="width: 100%; height: 100%;">
+                        <h:panelGrid columns="1">
+                            <p:commandLink update=":image_form:display" oncomplete="PF('dlg').show()">
+                                <f:setPropertyActionListener value="#{item}"
+                                                             target="#{imagesView.selectedImage}"/>
+                                <p:graphicImage url="#{item.reference}" style="width: 100%; "/>
+                                <h:outputText value="#{item.description}"/>
+                            </p:commandLink>
+                        </h:panelGrid>
+                    </p:panel>
+                </p:dataGrid>
+                <p:dialog modal="true" widgetVar="dlg">
+                    <h:panelGrid id="display" columns="2">
+                        <f:facet name="header">
+                            <p:graphicImage url="#{imagesView.selectedImage.reference}"/>
+                        </f:facet>
+                        <h:outputText value="#{imagesView.selectedImage.description} "/>
+                        <h:outputText value="Owner: #{imagesView.selectedImage.description} "/>
                     </h:panelGrid>
-                </p:panel>
-            </p:dataGrid>
-            <p:dialog modal="true" widgetVar="dlg">
-                <h:panelGrid id="display" columns="2">
-                    <f:facet name="header">
-                        <p:graphicImage url="#{imagesView.selectedImage.reference}"/>
-                    </f:facet>
-                    <h:outputText value="#{imagesView.selectedImage.description} "/>
-                    <h:outputText value="Owner: #{imagesView.selectedImage.description} "/>
-                </h:panelGrid>
-            </p:dialog>
-        </h:form>
+                </p:dialog>
+            </h:form>
+        </h:body>
     </ui:define>
 </ui:composition>
 </html>
