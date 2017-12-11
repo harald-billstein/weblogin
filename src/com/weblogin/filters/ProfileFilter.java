@@ -20,7 +20,7 @@ import com.weblogin.beans.view.ProfileBean;
 
 
 /**
- * Filter checks if request is valid. If not filter directs request to proper destination
+ * Class filtering request heading for profile page
  * 
  * @author Harald & Stefan
  *
@@ -32,6 +32,10 @@ public class ProfileFilter implements Filter {
   private ProfileBean profileBean;
   private String username;
 
+  
+  /**
+   * checks if request is valid. If not filter directs request to proper destination
+   */
   @Override
   public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
       throws IOException, ServletException {
