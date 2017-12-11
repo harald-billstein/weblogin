@@ -6,7 +6,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
-import javax.wsdl.Input;
 import com.weblogin.api.RegisterWrapper;
 import com.weblogin.beans.UserSignupBean;
 
