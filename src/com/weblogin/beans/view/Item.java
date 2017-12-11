@@ -4,9 +4,9 @@ public class Item {
 
   private String name;
   private String url;
-  private boolean isloggedinAccessable;
+  private Boolean isloggedinAccessable;
 
-  public Item(String name, String url, boolean isloggedinAccessable) {
+  public Item(String name, String url, Boolean isloggedinAccessable) {
     this.name = name;
     this.url = url;
     this.isloggedinAccessable = isloggedinAccessable;
@@ -28,11 +28,11 @@ public class Item {
     this.url = url;
   }
 
-  public boolean isIsloggedinAccessable() {
+  public Boolean isIsloggedinAccessable() {
     return isloggedinAccessable;
   }
 
-  public void setIsloggedinAccessable(boolean isloggedinAccessable) {
+  public void setIsloggedinAccessable(Boolean isloggedinAccessable) {
     this.isloggedinAccessable = isloggedinAccessable;
   }
   
