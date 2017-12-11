@@ -1,17 +1,22 @@
 # A login portal (web)
 
-One Paragraph of project description goes here
+School project focusing on how to store user credentials in a database.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+This repository is one of three repositories needed to launch the project. Clone all three of them to launch the portal!
+
+1. (main) https://github.com/harald-billstein/weblogin.git
+2. (api)  https://github.com/sdlonn/WebRegisterAPI.git
+3. (api)  https://github.com/sdlonn/loginRestAPI.git
+
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+MySql database (See folder in main) for table structure
 
 ```
-Give examples
+Example: XAMPP
 ```
 
 ### Installing
@@ -24,34 +29,6 @@ Say what the step will be
 Give the example
 ```
 
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
 ## Deployment
 
 Add additional notes about how to deploy this on a live system
@@ -59,15 +36,14 @@ Add additional notes about how to deploy this on a live system
 ## Built With
 
 * [Maven](https://maven.apache.org/) - Dependency Management
+* [JSF](http://www.oracle.com/technetwork/java/javaee/javaserverfaces-139869.html) - Server side user interfaces
+* [REST/JERSEY](https://jersey.github.io) - API communication
+* [GITHUB](https://github.com) - Version control
+* [MYSQL](https://www.mysql.com/) - Database 
+* [TOMEE](http://tomee.apache.org) - EE application server
+* [JNDI](http://www.oracle.com/technetwork/java/index-jsp-137536.html) - Database connection pool handling
+* [PRIMEFACES](https://www.primefaces.org) - Picture gallery handling
 
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Authors
 
@@ -78,35 +54,3 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
-
-
-
-
-
-# KLADD!!!!
-
-Av stefan o Harald
-
-RestApi
-Jsf
-Mysql DB
-
-
-
-CREATE DATABASE authorization;
-
-USE authorization;
-
-CREATE TABLE user (user_id int AUTO_INCREMENT NOT NULL PRIMARY KEY, fname varchar(32) NOT NULL, lname varchar(32) NOT NULL,
-hashed_pwd varchar(64) NOT NULL, email varchar(32) NOT NULL UNIQUE, token_key varchar(64), token_key_time_stamp int);
-
-CREATE TABLE salt (salt_id int AUTO_INCREMENT NOT NULL PRIMARY KEY, salt varchar(32) NOT NULL, user_id int NOT null);
-
-INSERT INTO user (fname, lname, hashed_pwd, email) VALUES('Stefan', 'Lönn', 'XXXXXXXXXX', 'stefan.loon@gmail.com'),('Harald', 'Billstein', 'YYYYYYYYYY', 'harald.billstein@gmail.com');
-
-INSERT INTO salt (salt, user_id) VALUES('ABC',1),('DEF',2);
