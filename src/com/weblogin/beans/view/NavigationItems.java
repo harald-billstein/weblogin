@@ -6,6 +6,12 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
+/**
+ * Class handling menu items
+ * 
+ * @author Harald & Stefan
+ *
+ */
 @ManagedBean
 @ApplicationScoped
 public class NavigationItems {
@@ -31,6 +37,12 @@ public class NavigationItems {
     items.add(new Item("Gallery", GALLARY_PATH, null));
   }
 
+
+  /**
+   * Method collecting menu items for the active view
+   * 
+   * @return list of menu items
+   */
   public List<Item> getItems() {
 
     navigationItems = new ArrayList<>();
@@ -52,11 +64,6 @@ public class NavigationItems {
         }
       }
     }
-
     return navigationItems;
-  }
-
-  public void setItems(List<Item> items) {
-    this.items = items;
   }
 }

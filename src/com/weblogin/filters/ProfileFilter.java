@@ -18,13 +18,20 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 import com.weblogin.beans.view.ProfileBean;
 
+
+/**
+ * Filter checks if request is valid. If not filter directs request to proper destination
+ * 
+ * @author Harald & Stefan
+ *
+ */
 @WebFilter(filterName = "profile-filter", urlPatterns = "/profile.xhtml")
 public class ProfileFilter implements Filter {
 
   @Inject
   private ProfileBean profileBean;
   private String username;
-  
+
   @Override
   public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
       throws IOException, ServletException {
@@ -40,9 +47,6 @@ public class ProfileFilter implements Filter {
 
     username = (String) request.getSession().getAttribute("username");
     String token = (String) request.getSession().getAttribute("token");
-
-    System.out.println("Username from session: " + username);
-    System.out.println("Token from session: " + token);
 
     if (username == null || token == null) {
       accessGranted = false;
@@ -60,8 +64,8 @@ public class ProfileFilter implements Filter {
           System.out.println("Response" + output);
           JSONObject jsonObj = new JSONObject(output);
           accessGranted = (Boolean) jsonObj.get("userTokenValid");
-          System.out.println(accessGranted);
         }
+        
       } else {
         System.out.println("Session expired!");
         accessGranted = false;
@@ -71,11 +75,9 @@ public class ProfileFilter implements Filter {
     if (accessGranted) {
       profileBean.setUsername(username);
       chain.doFilter(req, resp);
-
     } else {
       response.sendRedirect("login.xhtml");
     }
-
   }
 
   @Override
@@ -83,10 +85,8 @@ public class ProfileFilter implements Filter {
     System.out.println("ProfileFilter: destroy");
   }
 
-
   @Override
   public void init(FilterConfig config) throws ServletException {
     System.out.println("ProfileFilter: init");
   }
-
 }

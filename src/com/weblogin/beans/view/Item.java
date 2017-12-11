@@ -1,5 +1,11 @@
 package com.weblogin.beans.view;
 
+/**
+ * Class containing one menu option
+ * 
+ * @author Harald & Stefan
+ *
+ */
 public class Item {
 
   private String name;
@@ -35,6 +41,4 @@ public class Item {
   public void setIsloggedinAccessable(Boolean isloggedinAccessable) {
     this.isloggedinAccessable = isloggedinAccessable;
   }
-  
-  
 }

@@ -1,9 +1,15 @@
 package com.weblogin.beans.view;
 
 import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 import com.weblogin.api.LoginWrapper;
+
+/**
+ * Class handling the login information
+ * 
+ * @author Harald & Stefan
+ *
+ */
 
 @RequestScoped
 @Named
@@ -12,13 +18,16 @@ public class LoginBean {
   private String username;
   private String password;
 
-  @Inject
-  ProfileBean profileBean;
-
   public LoginBean() {
     System.out.println("LoginBean: init");
   }
 
+
+  /**
+   * processes the login request
+   * 
+   * @return URL
+   */
   public String signIn() {
     LoginWrapper loginWrapper = new LoginWrapper();
     return loginWrapper.login(username, password);
@@ -44,5 +53,4 @@ public class LoginBean {
   public String toString() {
     return "LoginBean [userName=" + username + ", password=" + password + "]";
   }
-
 }

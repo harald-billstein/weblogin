@@ -1,15 +1,22 @@
 package com.weblogin.beans;
 
+
+/**
+ * Class used to store information about a new user signing up
+ * 
+ * @author Harald & Stefan
+ *
+ */
 public class UserSignupBean {
-  
+
   private String userName;
   private String firstName;
   private String lastName;
   private String password;
   private String email;
-  
+
   public UserSignupBean() {
-    
+
   }
 
   public String getUserName() {
@@ -51,5 +58,4 @@ public class UserSignupBean {
   public void setEmail(String email) {
     this.email = email;
   }
-
 }

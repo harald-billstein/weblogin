@@ -6,6 +6,12 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
+/**
+ * Class handling user when viewing profile page
+ * 
+ * @author Harald & Stefan
+ *
+ */
 @SessionScoped
 @Named
 public class ProfileBean implements Serializable {
@@ -19,6 +25,11 @@ public class ProfileBean implements Serializable {
     System.out.println("ProfileBean: init");
   }
 
+  /**
+   * Signs out user by destroying the session
+   * 
+   * @return
+   */
   public String signOut() {
     System.out.println("Signout.....");
 
@@ -44,5 +55,4 @@ public class ProfileBean implements Serializable {
   public void setPassword(String password) {
     this.password = password;
   }
-
 }

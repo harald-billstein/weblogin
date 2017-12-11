@@ -6,9 +6,17 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
+import javax.wsdl.Input;
 import com.weblogin.api.RegisterWrapper;
 import com.weblogin.beans.UserSignupBean;
 
+
+/**
+ * Class handling all information needed to create a new user
+ * 
+ * @author Harald & Stefan
+ *
+ */
 @RequestScoped
 @Named
 public class SignupBean {
@@ -24,8 +32,13 @@ public class SignupBean {
     System.out.println("SignupBean: init");
   }
 
-  public String signup() {
 
+  /**
+   * processes the signup request
+   * 
+   * @return URL
+   */
+  public String signup() {
     RegisterWrapper registerWrapper = new RegisterWrapper();
     UserSignupBean user = createUser();
 
@@ -42,6 +55,14 @@ public class SignupBean {
     return user;
   }
 
+  /**
+   * Validates email
+   * 
+   * @param context
+   * @param component
+   * @param value
+   * @throws ValidatorException
+   */
   public void validateEmail(FacesContext context, UIComponent component, Object value)
       throws ValidatorException {
     String input = value.toString();
@@ -52,6 +73,14 @@ public class SignupBean {
     }
   }
 
+  /**
+   * Validates name
+   * 
+   * @param context
+   * @param component
+   * @param value
+   * @throws ValidatorException
+   */
   public void validateName(FacesContext context, UIComponent component, Object value)
       throws ValidatorException {
     String input = value.toString();
@@ -72,6 +101,14 @@ public class SignupBean {
 
   }
 
+  /**
+   * Validates password
+   * 
+   * @param context
+   * @param component
+   * @param value
+   * @throws ValidatorException
+   */
   public void validatePassword(FacesContext context, UIComponent component, Object value)
       throws ValidatorException {
     String input = value.toString();
@@ -86,7 +123,7 @@ public class SignupBean {
     }
 
     if (input.length() < 6) {
-      FacesMessage message = new FacesMessage("Name is to short!");
+      FacesMessage message = new FacesMessage("Password is to short!");
       throw new ValidatorException(message);
     }
 

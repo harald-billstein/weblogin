@@ -13,8 +13,8 @@
         </h:head>
         <h:form enctype="multipart/form-data">
             <p:growl id="messages" showDetail="true"/>
-            <p:fileUpload value="#{fileUploadVIew.file}" mode="simple" skinSimple="true"/>
-            <p:commandButton value="Submit" ajax="false"
+            <p:fileUpload rendered="#{not empty profileBean.username}" value="#{fileUploadVIew.file}" mode="simple" skinSimple="true"/>
+            <p:commandButton rendered="#{not empty profileBean.username}" value="Submit" ajax="false"
                              actionListener="#{fileUploadVIew.uploadFile}" disabled="false"/>
         </h:form>
 

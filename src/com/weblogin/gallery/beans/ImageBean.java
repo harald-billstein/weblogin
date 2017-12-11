@@ -4,7 +4,8 @@ import java.io.Serializable;
 
 public class ImageBean implements Serializable{
 
-  private final String path ="http://localhost:8080/img?image=";
+  //private final String path = "http://localhost:8080/img?image=";
+  private final String path = "http://localhost:8080/webLoginProject/img?image=";
   private String owner;
   private String reference;
   private String description;
