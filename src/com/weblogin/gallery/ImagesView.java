@@ -15,7 +15,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import javax.enterprise.context.ConversationScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 @Named
