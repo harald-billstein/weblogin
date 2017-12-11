@@ -14,11 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 
+import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 @Named
-@SessionScoped
+@ConversationScoped
 public class ImagesView implements Serializable{
 
   private List<ImageBean> images;
@@ -27,7 +28,7 @@ public class ImagesView implements Serializable{
   @PostConstruct
   public void init() {
     images = new ArrayList<>();
-    getPictures();
+    loadPictures();
     System.out.println("Construct ImageView");
 
   }
@@ -43,7 +44,7 @@ public class ImagesView implements Serializable{
   public void setSelectedImage(ImageBean selectedImage) {
     this.selectedImage = selectedImage;
   }
-  private void getPictures() {
+  private void loadPictures() {
     try {
 
       Class.forName("com.mysql.jdbc.Driver");
