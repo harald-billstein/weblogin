@@ -10,14 +10,13 @@ This repository is one of three repositories needed to launch the project. Clone
 2. (api)  https://github.com/sdlonn/WebRegisterAPI.git
 3. (api)  https://github.com/sdlonn/loginRestAPI.git
 
+There is one user in user database, remove when program is up and working, Username `admin` Password `password`
 
 ### Prerequisites
 
-MySql database (See folder in main) for table structure
-
-```
-Example: XAMPP
-```
+* MySql v5.7.20 or later
+* Java 8
+* Tomcat EE plus
 
 ### Installing
 
