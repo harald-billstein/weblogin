@@ -17,36 +17,27 @@ import com.weblogin.beans.UserSignupBean;
  * Class handeling calls to the login API
  * 
  * @author Harald & Stefan
- *
+ * @since 2017-12-12
  */
 public class RegisterWrapper {
 
+  private BufferedReader reader;
+  private OutputStreamWriter writer;
+  private JSONObject jsonOut;
+  private JSONObject jsonIn = null;
 
   public String deleteUser(String user, String token) {
     String apiUrl = "http://localhost:8080/WebRegisterAPI/v1/delete/" + user + "/" + token;
     System.out.println(apiUrl);
     HttpURLConnection connection;
-    JSONObject jsonIn = null;
+    boolean success = false;
 
     connection = getConnection(apiUrl, "DELETE");
+    success = sendJsonSuccess(connection, "message");
 
-
-    // REVICED JSON FROM API
-    try {
-      BufferedReader reader =
-          new BufferedReader(new InputStreamReader(connection.getInputStream()));
-
-      String output;
-      while ((output = reader.readLine()) != null) {
-        jsonIn = new JSONObject(output);
-        System.out.println((String) jsonIn.get("message"));
-        addErrorMessages((String) jsonIn.get("message"));
-      }
-    } catch (Exception e) {
+    if (!success) {
+      new Exception("Failed to delete user!");
     }
-
-
-
     return "login?faces-redirect=true";
   }
 
@@ -61,17 +52,28 @@ public class RegisterWrapper {
 
     String navigationLink;
     String apiUrl = "http://localhost:8080/WebRegisterAPI/api/register/new/user";
-    HttpURLConnection connection = null;
-    Integer responseCode = null;
-    OutputStreamWriter writer;
-    BufferedReader reader;
-    boolean registrationSuccess = false;
+    Integer responseCode;
+    boolean signupSuccess;
+    HttpURLConnection connection;
 
-    JSONObject jsonOut;
-    JSONObject jsonIn = null;
-
-    // SEND JSON TO API
     connection = getConnection(apiUrl, "PUT");
+    responseCode = sendUserToApi(user, connection);
+    signupSuccess = sendJsonSuccess(connection, "registerd");
+
+
+    if (responseCode == 200 && signupSuccess) {
+      setTokenToUserSession(user);
+      navigationLink = "profile?faces-redirect=true";
+    } else {
+      addErrorMessages("ERROR IN SIGNUP!");
+      navigationLink = "signup";
+    }
+    return navigationLink;
+  }
+
+  private int sendUserToApi(UserSignupBean user, HttpURLConnection connection) {
+    Integer responseCode = null;
+
     try {
       jsonOut = new JSONObject(user);
       writer = new OutputStreamWriter(connection.getOutputStream());
@@ -81,33 +83,32 @@ public class RegisterWrapper {
     } catch (IOException e) {
       e.printStackTrace();
     }
+    return responseCode;
+  }
 
-    // REVICED JSON FROM API
+  private void setTokenToUserSession(UserSignupBean user) {
+    String token = (String) jsonIn.get("token");
+    FacesContext context = FacesContext.getCurrentInstance();
+    HttpSession session = (HttpSession) context.getExternalContext().getSession(true);
+    session.setAttribute("username", user.getUserName());
+    session.setAttribute("token", token);
+  }
+
+  private boolean sendJsonSuccess(HttpURLConnection connection, String key) {
+    boolean registrationSuccess = false;
+    String output;
+
     try {
       reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-
-      String output;
       while ((output = reader.readLine()) != null) {
         jsonIn = new JSONObject(output);
-        registrationSuccess = (boolean) jsonIn.get("registerd");
+        jsonIn.get(key);
+        registrationSuccess = true;
       }
-
     } catch (IOException e) {
       e.printStackTrace();
     }
-
-    if (responseCode == 200 && registrationSuccess) {
-      String token = (String) jsonIn.get("token");
-      FacesContext context = FacesContext.getCurrentInstance();
-      HttpSession session = (HttpSession) context.getExternalContext().getSession(true);
-      session.setAttribute("username", user.getUserName());
-      session.setAttribute("token", token);
-      navigationLink = "profile?faces-redirect=true";
-    } else {
-      addErrorMessages("ERROR IN SIGNUP!");
-      navigationLink = "signup";
-    }
-    return navigationLink;
+    return registrationSuccess;
   }
 
   private HttpURLConnection getConnection(String apiUrl, String method) {
