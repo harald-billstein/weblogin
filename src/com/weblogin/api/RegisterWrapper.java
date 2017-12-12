@@ -21,11 +21,40 @@ import com.weblogin.beans.UserSignupBean;
  */
 public class RegisterWrapper {
 
-  
+
+  public String deleteUser(String user, String token) {
+    String apiUrl = "http://localhost:8080/WebRegisterAPI/v1/delete/" + user + "/" + token;
+    System.out.println(apiUrl);
+    HttpURLConnection connection;
+    JSONObject jsonIn = null;
+
+    connection = getConnection(apiUrl, "DELETE");
+
+
+    // REVICED JSON FROM API
+    try {
+      BufferedReader reader =
+          new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+      String output;
+      while ((output = reader.readLine()) != null) {
+        jsonIn = new JSONObject(output);
+        System.out.println((String) jsonIn.get("message"));
+        addErrorMessages((String) jsonIn.get("message"));
+      }
+    } catch (Exception e) {
+    }
+
+
+
+    return "login?faces-redirect=true";
+  }
+
+
   /**
    * Registers a user
    * 
-   * @param user created 
+   * @param user created
    * @return URL
    */
   public String signup(UserSignupBean user) {
@@ -42,7 +71,7 @@ public class RegisterWrapper {
     JSONObject jsonIn = null;
 
     // SEND JSON TO API
-    connection = getConnection(apiUrl);
+    connection = getConnection(apiUrl, "PUT");
     try {
       jsonOut = new JSONObject(user);
       writer = new OutputStreamWriter(connection.getOutputStream());
@@ -81,14 +110,14 @@ public class RegisterWrapper {
     return navigationLink;
   }
 
-  private HttpURLConnection getConnection(String apiUrl) {
+  private HttpURLConnection getConnection(String apiUrl, String method) {
     URL url;
     HttpURLConnection connection = null;
     try {
       url = new URL(apiUrl);
       connection = (HttpURLConnection) url.openConnection();
       connection.setDoOutput(true);
-      connection.setRequestMethod("PUT");
+      connection.setRequestMethod(method);
       connection.setRequestProperty("Content-Type", "application/json");
       connection.setRequestProperty("Accept", "application/json");
     } catch (IOException e) {
