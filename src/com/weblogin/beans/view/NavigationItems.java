@@ -16,53 +16,40 @@ import javax.faces.context.FacesContext;
 @ApplicationScoped
 public class NavigationItems {
 
-  private List<Item> items;
-  private List<Item> navigationItems;
-
   private static final String LOGIN_PATH = "login.xhtml";
   private static final String SIGNUP_PATH = "signup.xhtml";
-  private static final String PROFILE_PATH = "profile.xhtml";
+  private static final String PROFILE_PATH = "profile";
   private static final String GALLARY_PATH = "gallery.xhtml";
 
   private FacesContext context = FacesContext.getCurrentInstance();
 
   public NavigationItems() {
-
     context = FacesContext.getCurrentInstance();
-
-    items = new ArrayList<>();
-    items.add(new Item("Login", LOGIN_PATH, false));
-    items.add(new Item("Signup", SIGNUP_PATH, false));
-    items.add(new Item("Profile", PROFILE_PATH, true));
-    items.add(new Item("Gallery", GALLARY_PATH, null));
   }
 
+  public List<Item> createLogedinItems() {
+    List<Item> logedinItems = new ArrayList<>();
+    context.getViewRoot().getId();
+    String xhtmlPage = context.getViewRoot().getViewId();
 
-  /**
-   * Method collecting menu items for the active view
-   * 
-   * @return list of menu items
-   */
-  public List<Item> getItems() {
-
-    navigationItems = new ArrayList<>();
-    String path = context.getViewRoot().getViewId();
-
-    if (path.equals("/profile.xhtml") || path.equals("/gallery.xhtml")) {
-      // USER LOGGED IN
-      for (Item item : items) {
-        if (item.isIsloggedinAccessable() == null || item.isIsloggedinAccessable()) {
-          navigationItems.add(item);
-        }
-      }
-    } else {
-      // USER LOGGED OUT
-      for (Item item : items) {
-        if (item.isIsloggedinAccessable() == null || !item.isIsloggedinAccessable()) {
-          navigationItems.add(item);
-        }
-      }
+    if (xhtmlPage.equals("/profile.xhtml") || xhtmlPage.equals("/gallery.xhtml")) {
+      System.out.println("Login items created");
+      System.out.println("List size: " + logedinItems.size());
+      logedinItems.add(new Item("Profile", PROFILE_PATH));
+      logedinItems.add(new Item("Gallery", GALLARY_PATH));
     }
-    return navigationItems;
+    return logedinItems;
+  }
+
+  public List<Item> createLogedoutItems() {
+    List<Item> logedoutItems = new ArrayList<>();
+    String xhtmlPage = context.getViewRoot().getViewId();
+    
+    if (xhtmlPage.equals("/login.xhtml") || xhtmlPage.equals("/signup.xhtml")) {
+    logedoutItems.add(new Item("Login", LOGIN_PATH));
+    logedoutItems.add(new Item("Signup", SIGNUP_PATH));
+    logedoutItems.add(new Item("Gallery", GALLARY_PATH));
+    }
+    return logedoutItems;
   }
 }
