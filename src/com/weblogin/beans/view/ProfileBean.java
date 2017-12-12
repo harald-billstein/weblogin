@@ -5,6 +5,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
+import com.weblogin.api.RegisterWrapper;
 
 /**
  * Class handling user when viewing profile page
@@ -22,7 +23,7 @@ public class ProfileBean implements Serializable {
   private String password;
 
   public ProfileBean() {
-    System.out.println("ProfileBean: init");
+    System.out.println("ProfileBean: init"); 
   }
 
   /**
@@ -31,13 +32,20 @@ public class ProfileBean implements Serializable {
    * @return
    */
   public String signOut() {
-    System.out.println("Signout.....");
-
-    HttpSession session =
-        (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+    System.out.println("ProfileBean: signOut");
+    HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
     session.invalidate();
 
     return "profile?faces-redirect=true";
+  }
+  
+  public String deleteProfile() {
+    System.out.println("ProfileBean: deleteProfile");
+    RegisterWrapper registerWrapper = new RegisterWrapper();
+    HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+    registerWrapper.deleteUser(username, (String) session.getAttribute("token"));
+    
+    return signOut(); 
   }
 
   public String getUsername() {
