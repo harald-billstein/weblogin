@@ -15,9 +15,14 @@
 				<h:link class="navigationitem" value="#{item.name}" outcome="#{item.url}" />
 			</ui:repeat>
 			
+			<ui:repeat value="#{navigationItems.createDefaultItems()}" var="item">
+				<h:link class="navigationitem" value="#{item.name}" outcome="#{item.url}" />
+			</ui:repeat>
+			
 			<h:commandLink class="navigationitem" rendered="#{profileBean.username != null}" value="Logout" action="#{profileBean.signOut}" />
 			<h:commandLink class="navigationitem" rendered="#{profileBean.username != null}" value="Purge ACC" action="#{profileBean.deleteProfile}" />
-		
+			<h:outputLink class="navigationitem" value="https://github.com/harald-billstein/weblogin">Github</h:outputLink>
+			
 		</h:form>
 	</h:panelGrid>
 </div>
