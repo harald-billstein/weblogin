@@ -1,4 +1,4 @@
-# A login portal (web)
+# A login portal (web) [![Awesome](http://forthebadge.com/images/badges/gluten-free.svg)]()[![Awesome](http://forthebadge.com/images/badges/powered-by-electricity.svg)]()
 
 School project focusing on how to store user credentials in a database.
 
@@ -10,28 +10,50 @@ This repository is one of three repositories needed to launch the project. Clone
 2. (api)  https://github.com/sdlonn/WebRegisterAPI.git
 3. (api)  https://github.com/sdlonn/loginRestAPI.git
 
+There is one user in user database, remove when program is up and working, Username `admin` Password `password`
 
 ### Prerequisites
 
+<<<<<<< HEAD
 MySql database (See folder in main) for table structure (och importera)
 
 ```
 Example: XAMPP
 ```
+=======
+* MySql v5.7.20 or later
+* Java 8
+* Tomcat EE plus
+>>>>>>> 59ed8064650494f0b23e35f87425ecfa00e36982
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
+* Start by installing both api's [register](https://github.com/sdlonn/WebRegisterAPI.git) and [login](https://github.com/sdlonn/loginRestAPI.git)
 
-Say what the step will be
+* Skip if you did this when installing api's [Install MySql](https://dev.mysql.com/downloads/)
+Or use [XAMPP](https://www.apachefriends.org/index.html)
 
-```
-Give the example
-```
+* Skip if you did this when installing api's Download and install [TomcatEE plus](http://openejb.apache.org/downloads.html) to [Eclipse](http://www.eclipse.org/downloads/eclipse-packages/) or [Intellij](https://www.jetbrains.com/idea/download/#section=windows)
+
+* Clone https://github.com/harald-billstein/weblogin.git
+
+* Download and import the webresources.sql file into your databse
+
+* Configure context.xml located in "weblogin/WebContent/META-INF/"
+    If needed change url username password to match the setup in your database
+    
+* Compile with maven inside your ide or run `mvn clean install`
+
+* In Eclipse run all three modules in same TomEE server
+
+* In Intellij go to `run` then `edit configurations` under the `deployment` tab add both api's, then you need to set Application context
+ weblogin to `/webLoginProject` webregister???.war to `/WebRegisterAPI` loginapi???.war to `/LoginApi`
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+Additional notes about how to deploy this on a live system
+* If you run all modules on same tomcatEE you may have to change the JNDI config
+* May be necessary to use an [external image servlet](https://github.com/sdlonn/WebPictureServlet) if you deploy this live
 
 ## Built With
 
