@@ -10,7 +10,7 @@ import javax.faces.context.FacesContext;
  * Class handling menu items
  * 
  * @author Harald & Stefan
- *
+ * @since 2017-12-12
  */
 @ManagedBean
 @ApplicationScoped

@@ -16,7 +16,7 @@ import org.json.JSONObject;
  * Class handeling calls to the login API
  * 
  * @author Harald & Stefan
- *
+ * @since 2017-12-12
  */
 public class LoginWrapper {
 

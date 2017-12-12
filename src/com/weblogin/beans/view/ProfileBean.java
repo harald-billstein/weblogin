@@ -11,7 +11,7 @@ import com.weblogin.api.RegisterWrapper;
  * Class handling user when viewing profile page
  * 
  * @author Harald & Stefan
- *
+ * @since 2017-12-12
  */
 @SessionScoped
 @Named

@@ -14,7 +14,7 @@ import com.weblogin.beans.UserSignupBean;
  * Class handling all information needed to create a new user
  * 
  * @author Harald & Stefan
- *
+ * @since 2017-12-12
  */
 @RequestScoped
 @Named

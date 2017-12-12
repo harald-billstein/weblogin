@@ -23,7 +23,7 @@ import com.weblogin.beans.view.ProfileBean;
  * Class filtering request heading for profile page
  * 
  * @author Harald & Stefan
- *
+ * @since 2017-12-12
  */
 @WebFilter(filterName = "profile-filter", urlPatterns = "/profile.xhtml")
 public class ProfileFilter implements Filter {

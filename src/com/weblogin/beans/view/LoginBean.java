@@ -8,7 +8,7 @@ import com.weblogin.api.LoginWrapper;
  * Class handling the login information
  * 
  * @author Harald & Stefan
- *
+ * @since 2017-12-12
  */
 
 @RequestScoped
