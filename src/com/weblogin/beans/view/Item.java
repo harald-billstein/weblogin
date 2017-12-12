@@ -10,12 +10,10 @@ public class Item {
 
   private String name;
   private String url;
-  private Boolean isloggedinAccessable;
 
-  public Item(String name, String url, Boolean isloggedinAccessable) {
+  public Item(String name, String url) {
     this.name = name;
     this.url = url;
-    this.isloggedinAccessable = isloggedinAccessable;
   }
 
   public String getName() {
@@ -32,13 +30,5 @@ public class Item {
 
   public void setUrl(String url) {
     this.url = url;
-  }
-
-  public Boolean isIsloggedinAccessable() {
-    return isloggedinAccessable;
-  }
-
-  public void setIsloggedinAccessable(Boolean isloggedinAccessable) {
-    this.isloggedinAccessable = isloggedinAccessable;
   }
 }
