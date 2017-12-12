@@ -31,7 +31,9 @@ Give the example
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+Additional notes about how to deploy this on a live system
+* If you run all modules on same tomcatEE you may have to change the JNDI config
+* May be necessary to use an [external image servlet](https://github.com/sdlonn/WebPictureServlet) if you deploy this live
 
 ## Built With
 
