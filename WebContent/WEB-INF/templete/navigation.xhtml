@@ -6,11 +6,18 @@
 <div class="navigation">
 	<h:panelGrid columns="3" class="navigation">
 		<h:form>
-			<ui:repeat value="#{navigationItems.items}" var="item">
-				<h:link class="navigationitem" value="#{item.name}"
-					outcome="#{item.url}" />
+		
+			<ui:repeat value="#{navigationItems.createLogedoutItems()}" var="item">
+				<h:link class="navigationitem" value="#{item.name}" outcome="#{item.url}" />
 			</ui:repeat>
-			<h:commandLink rendered="#{not empty profileBean.username}" class="navigationitem" value="Logout" action="#{profileBean.signOut}" />
+			
+			<ui:repeat value="#{navigationItems.createLogedinItems()}" var="item">
+				<h:link class="navigationitem" value="#{item.name}" outcome="#{item.url}" />
+			</ui:repeat>
+			
+			<h:commandLink class="navigationitem" rendered="#{profileBean.username != null}" value="Logout" action="#{profileBean.signOut}" />
+			<h:commandLink class="navigationitem" rendered="#{profileBean.username != null}" value="Purge ACC" action="#{profileBean.deleteProfile}" />
+		
 		</h:form>
 	</h:panelGrid>
 </div>
