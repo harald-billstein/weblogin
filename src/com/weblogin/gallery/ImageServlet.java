@@ -16,17 +16,15 @@ public class ImageServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) {
     String imageReference = request.getParameter("image");
-    System.out.println(imageReference);
-    try {
 
+    try {
       Class.forName("com.mysql.jdbc.Driver");
       Connection connection = DriverManager
-          .getConnection("jdbc:mysql://localhost/WebResources?user=root&password=");
+          .getConnection("jdbc:mysql://172.17.0.2/webresources?user=webapp&password=password");
       PreparedStatement ps = connection
           .prepareStatement("SELECT owner, id, img FROM images WHERE reference=?;");
       ps.setString(1, imageReference);
       ResultSet rs = ps.executeQuery();
-      FileOutputStream out;
 
       while (rs.next()) {
         InputStream input = rs.getBinaryStream("img");
@@ -36,11 +34,16 @@ public class ImageServlet extends HttpServlet {
           response.getOutputStream().write(buffer);
         }
       }
+      //TODO close connection
       connection.close();
     } catch (Exception e) {
       e.printStackTrace();
+      try {
+        response.getWriter().write("fail");
+      } catch (IOException e1) {
+        e1.printStackTrace();
+      }
       System.out.println("IN CATCH");
     }
-    System.out.println("Servlet end");
   }
 }

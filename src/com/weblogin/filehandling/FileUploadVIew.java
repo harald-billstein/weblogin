@@ -32,7 +32,7 @@ public class FileUploadVIew implements Serializable {
 
       try {
         Class.forName("com.mysql.jdbc.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/WebResources?user=root&password=");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://172.17.0.2/webresources?user=webapp&password=password");
         connection.setAutoCommit(false);
         PreparedStatement ps = connection.prepareStatement("INSERT INTO images (owner, img, public, reference) VALUES (?, ?, ?, ?);");
         ps.setString(1, file.getFileName());

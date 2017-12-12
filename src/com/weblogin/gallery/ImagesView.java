@@ -48,7 +48,7 @@ public class ImagesView implements Serializable{
 
       Class.forName("com.mysql.jdbc.Driver");
       Connection connection = DriverManager
-          .getConnection("jdbc:mysql://localhost/WebResources?user=root&password=");
+          .getConnection("jdbc:mysql://172.17.0.2/webresources?user=webapp&password=password");
       PreparedStatement ps = connection
           .prepareStatement("SELECT owner, reference, description FROM images WHERE public=?;");
       ps.setBoolean(1, true);
