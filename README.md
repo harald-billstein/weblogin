@@ -1,4 +1,4 @@
-# A login portal (web)
+# A login portal (web) [![Awesome](http://forthebadge.com/images/badges/gluten-free.svg)]()[![Awesome](http://forthebadge.com/images/badges/powered-by-electricity.svg)]()
 
 School project focusing on how to store user credentials in a database.
 
