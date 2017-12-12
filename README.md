@@ -4,7 +4,7 @@ School project focusing on how to store user credentials in a database.
 
 ## Getting Started
 
-This repository is one of three repositories needed to launch the project. Clone all three of them to launch the portal!
+This repository is one of three repositories needed to launch the project. Clone all three of them to launch the portal! (imp i ide )
 
 1. (main) https://github.com/harald-billstein/weblogin.git
 2. (api)  https://github.com/sdlonn/WebRegisterAPI.git
@@ -13,7 +13,7 @@ This repository is one of three repositories needed to launch the project. Clone
 
 ### Prerequisites
 
-MySql database (See folder in main) for table structure
+MySql database (See folder in main) for table structure (och importera)
 
 ```
 Example: XAMPP
@@ -43,6 +43,8 @@ Add additional notes about how to deploy this on a live system
 * [TOMEE](http://tomee.apache.org) - EE application server
 * [JNDI](http://www.oracle.com/technetwork/java/index-jsp-137536.html) - Database connection pool handling
 * [PRIMEFACES](https://www.primefaces.org) - Picture gallery handling
+* [FILTER](http://www.oracle.com/technetwork/java/filters-137243.html) - Filter
+* [Servlet](https://docs.oracle.com/javaee/6/tutorial/doc/bnafd.html) - Servlets
 
 
 ## Authors
