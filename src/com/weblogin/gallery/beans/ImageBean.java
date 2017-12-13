@@ -2,6 +2,9 @@ package com.weblogin.gallery.beans;
 
 import java.io.Serializable;
 
+/**
+ * Image pojo
+ */
 public class ImageBean implements Serializable{
 
   //private final String path = "http://localhost:8080/img?image=";
