@@ -13,7 +13,6 @@ This repository is one of three repositories needed to launch the project. Clone
 
 ### Prerequisites
 
-=======
 * MySql v5.7.20 or later
 * Java 8
 * Tomcat EE plus v7.0.2
