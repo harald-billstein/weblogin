@@ -24,7 +24,9 @@ This repository is one of three repositories needed to launch the project. Clone
 
 * Clone https://github.com/harald-billstein/weblogin.git
 
-* Download and import the webresources.sql file into your database
+* Create a new database named `webresources`
+
+* Download and import the webresources.sql file into your database named `webresources`
 
 * Configure context.xml located in "weblogin/WebContent/META-INF/"
     If needed change url, username and password to match the setup in your database
