@@ -5,7 +5,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
-public class AbstractApiConnection {
+public abstract class AbstractApiConnection {
 
   public HttpURLConnection getConnection(String apiUrl, String method,
       List<RequestPropertyPair> pairs) {

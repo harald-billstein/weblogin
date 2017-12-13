@@ -8,11 +8,8 @@ import java.util.UUID;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
-
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import java.io.Serializable;
 
@@ -37,19 +34,22 @@ public class FileUploadVIew implements Serializable {
     PreparedStatement ps = null;
     try (Connection connection = DriverManager.getConnection(dbUrl, username, password)) {
       connection.setAutoCommit(false);
-      ps = connection.prepareStatement("INSERT INTO images (owner, img, public, reference) VALUES (?, ?, ?, ?);");
+      ps = connection.prepareStatement(
+          "INSERT INTO images (owner, img, public, reference) VALUES (?, ?, ?, ?);");
       ps.setString(1, file.getFileName());
       ps.setBinaryStream(2, file.getInputstream());
       ps.setBoolean(3, true);
       ps.setString(4, UUID.randomUUID().toString().replace("-", ""));
       ps.executeUpdate();
       connection.commit();
-      FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Upload success", file.getFileName() + " is uploaded.");
+      FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Upload success",
+          file.getFileName() + " is uploaded.");
       FacesContext.getCurrentInstance().addMessage(null, msg);
     } catch (Exception e) {
       e.printStackTrace();
       // Add error message
-      FacesMessage errorMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Upload error", e.getMessage());
+      FacesMessage errorMsg =
+          new FacesMessage(FacesMessage.SEVERITY_ERROR, "Upload error", e.getMessage());
       FacesContext.getCurrentInstance().addMessage(null, errorMsg);
     } finally {
       if (ps != null) {

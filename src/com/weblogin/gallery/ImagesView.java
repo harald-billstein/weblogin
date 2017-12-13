@@ -20,6 +20,7 @@ import javax.inject.Named;
 @ConversationScoped
 public class ImagesView implements Serializable {
 
+  private static final long serialVersionUID = -5558583898402201685L;
   private List<ImageBean> images;
   private ImageBean selectedImage;
   private final String dbUrl = "jdbc:mysql://localhost/WebResources";

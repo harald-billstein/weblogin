@@ -23,7 +23,7 @@ public class ImageServlet extends HttpServlet {
   /**
    * Generates a picture from a database
    *
-   * @param request  HttpServletRequest
+   * @param request HttpServletRequest
    * @param response HttpServletResponse
    */
   @Override

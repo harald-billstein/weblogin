@@ -23,7 +23,7 @@ public class ProfileBean implements Serializable {
   private String password;
 
   public ProfileBean() {
-    System.out.println("ProfileBean: init"); 
+    System.out.println("ProfileBean: init");
   }
 
   /**
@@ -33,19 +33,21 @@ public class ProfileBean implements Serializable {
    */
   public String signOut() {
     System.out.println("ProfileBean: signOut");
-    HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+    HttpSession session =
+        (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
     session.invalidate();
 
     return "profile?faces-redirect=true";
   }
-  
+
   public String deleteProfile() {
     System.out.println("ProfileBean: deleteProfile");
     RegisterWrapper registerWrapper = new RegisterWrapper();
-    HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+    HttpSession session =
+        (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
     registerWrapper.deleteUser(username, (String) session.getAttribute("token"));
-    
-    return signOut(); 
+
+    return signOut();
   }
 
   public String getUsername() {

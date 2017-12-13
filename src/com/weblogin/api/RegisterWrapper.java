@@ -18,14 +18,14 @@ import com.weblogin.beans.UserSignupBean;
  * @author Harald & Stefan
  * @since 2017-12-12
  */
-public class RegisterWrapper extends AbstractApiConnection{
+public class RegisterWrapper extends AbstractApiConnection {
 
   private BufferedReader reader;
   private OutputStreamWriter writer;
   private JSONObject jsonOut;
   private JSONObject jsonIn = null;
-  
-  
+
+
   /**
    * Delete a user
    * 
