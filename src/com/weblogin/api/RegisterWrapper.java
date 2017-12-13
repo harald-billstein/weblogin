@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
-import java.net.URL;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -14,25 +13,33 @@ import com.weblogin.beans.UserSignupBean;
 
 
 /**
- * Class handeling calls to the login API
+ * Class handling calls to the login API
  * 
  * @author Harald & Stefan
  * @since 2017-12-12
  */
-public class RegisterWrapper {
+public class RegisterWrapper extends AbstractApiConnection{
 
   private BufferedReader reader;
   private OutputStreamWriter writer;
   private JSONObject jsonOut;
   private JSONObject jsonIn = null;
-
+  
+  
+  /**
+   * Delete a user
+   * 
+   * @param user user
+   * @param user token
+   * @return URL
+   */
   public String deleteUser(String user, String token) {
     String apiUrl = "http://localhost:8080/WebRegisterAPI/v1/delete/" + user + "/" + token;
     System.out.println(apiUrl);
     HttpURLConnection connection;
     boolean success = false;
 
-    connection = getConnection(apiUrl, "DELETE");
+    connection = getConnection(apiUrl, "DELETE", null);
     success = sendJsonSuccess(connection, "message");
 
     if (!success) {
@@ -52,11 +59,11 @@ public class RegisterWrapper {
 
     String navigationLink;
     String apiUrl = "http://localhost:8080/WebRegisterAPI/api/register/new/user";
-    Integer responseCode;
+    int responseCode;
     boolean signupSuccess;
     HttpURLConnection connection;
 
-    connection = getConnection(apiUrl, "PUT");
+    connection = getConnection(apiUrl, "PUT", null);
     responseCode = sendUserToApi(user, connection);
     signupSuccess = sendJsonSuccess(connection, "registerd");
 
@@ -109,22 +116,6 @@ public class RegisterWrapper {
       e.printStackTrace();
     }
     return registrationSuccess;
-  }
-
-  private HttpURLConnection getConnection(String apiUrl, String method) {
-    URL url;
-    HttpURLConnection connection = null;
-    try {
-      url = new URL(apiUrl);
-      connection = (HttpURLConnection) url.openConnection();
-      connection.setDoOutput(true);
-      connection.setRequestMethod(method);
-      connection.setRequestProperty("Content-Type", "application/json");
-      connection.setRequestProperty("Accept", "application/json");
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    return connection;
   }
 
   private void addErrorMessages(String message) {

@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.URL;
 import javax.inject.Inject;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -16,6 +15,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
+import com.weblogin.api.LoginWrapper;
 import com.weblogin.beans.view.ProfileBean;
 
 
@@ -30,9 +30,8 @@ public class ProfileFilter implements Filter {
 
   @Inject
   private ProfileBean profileBean;
-  private String username;
 
-  
+
   /**
    * checks if request is valid. If not filter directs request to proper destination
    */
@@ -45,31 +44,26 @@ public class ProfileFilter implements Filter {
     HttpServletRequest request = (HttpServletRequest) req;
 
     Boolean accessGranted = false;
-    String link = null;
-    URL url;
     HttpURLConnection connection = null;
 
-    username = (String) request.getSession().getAttribute("username");
+    String username = (String) request.getSession().getAttribute("username");
     String token = (String) request.getSession().getAttribute("token");
 
     if (username == null || token == null) {
       accessGranted = false;
     } else {
-      link = "http://localhost:8080/LoginApi/api/validate/" + username + "/" + token;
-      url = new URL(link);
-      connection = (HttpURLConnection) url.openConnection();
-      connection.setRequestMethod("GET");
+      LoginWrapper loginWrapper = new LoginWrapper();
+      connection = loginWrapper.validateUser(username, token);
 
       if (connection.getResponseCode() == 200) {
-
         BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
         String output;
         while ((output = br.readLine()) != null) {
           System.out.println("Response" + output);
           JSONObject jsonObj = new JSONObject(output);
           accessGranted = (Boolean) jsonObj.get("userTokenValid");
         }
-        
       } else {
         System.out.println("Session expired!");
         accessGranted = false;
@@ -77,7 +71,6 @@ public class ProfileFilter implements Filter {
     }
 
     if (accessGranted) {
-      System.out.println("Username set to profileBean: " + username);
       profileBean.setUsername(username);
       chain.doFilter(req, resp);
     } else {
