@@ -66,6 +66,7 @@ public class ProfileFilter implements Filter {
         }
       } else {
         System.out.println("Session expired!");
+        profileBean.setUsername(null);
         accessGranted = false;
       }
     }
