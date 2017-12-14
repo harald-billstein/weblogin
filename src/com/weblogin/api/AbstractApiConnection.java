@@ -37,8 +37,8 @@ public abstract class AbstractApiConnection {
       connection.setRequestProperty("Accept", "application/json");
 
       if (pairs != null) {
-        for (int i = 0; i < pairs.size(); i++) {
-          connection.setRequestProperty(pairs.get(i).getKey(), pairs.get(i).getValue());
+        for (RequestPropertyPair pair : pairs) {
+          connection.setRequestProperty(pair.getKey(), pair.getValue());
         }
       }
 
