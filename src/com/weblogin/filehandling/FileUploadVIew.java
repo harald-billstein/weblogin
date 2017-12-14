@@ -10,10 +10,14 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
-
 import javax.inject.Named;
 import java.io.Serializable;
 
+/**
+ * @author someone
+ * @version 1.0
+ * @since 2017-12-06
+ */
 @Named
 @SessionScoped
 public class FileUploadVIew implements Serializable {
@@ -28,6 +32,11 @@ public class FileUploadVIew implements Serializable {
     System.out.println("FileUploadView init");
   }
 
+  /**
+   * Uploads file to database
+   *
+   * @param event FileUploadEvent
+   */
   public void uploadFile(FileUploadEvent event) {
     file = event.getFile();
     System.out.println("Upload event" + file.getFileName().toString());
@@ -36,7 +45,7 @@ public class FileUploadVIew implements Serializable {
     try (Connection connection = DriverManager.getConnection(dbUrl, username, password)) {
       connection.setAutoCommit(false);
       ps = connection.prepareStatement(
-          "INSERT INTO images (owner, img, public, reference) VALUES (?, ?, ?, ?);");
+              "INSERT INTO images (owner, img, public, reference) VALUES (?, ?, ?, ?);");
       ps.setString(1, file.getFileName());
       ps.setBinaryStream(2, file.getInputstream());
       ps.setBoolean(3, true);
@@ -44,13 +53,13 @@ public class FileUploadVIew implements Serializable {
       ps.executeUpdate();
       connection.commit();
       FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Upload success",
-          file.getFileName() + " is uploaded.");
+              file.getFileName() + " is uploaded.");
       FacesContext.getCurrentInstance().addMessage(null, msg);
     } catch (Exception e) {
       e.printStackTrace();
       // Add error message
       FacesMessage errorMsg =
-          new FacesMessage(FacesMessage.SEVERITY_ERROR, "Upload error", e.getMessage());
+              new FacesMessage(FacesMessage.SEVERITY_ERROR, "Upload error", e.getMessage());
       FacesContext.getCurrentInstance().addMessage(null, errorMsg);
     } finally {
       if (ps != null) {
