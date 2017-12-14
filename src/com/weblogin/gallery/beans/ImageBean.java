@@ -7,9 +7,6 @@ import java.io.Serializable;
  */
 public class ImageBean implements Serializable{
 
-  /**
-   * 
-   */
   private static final long serialVersionUID = -8942074447124882507L;
   //private final String path = "http://localhost:8080/img?image=";
   private final String path = "http://localhost:8080/webLoginProject/img?image=";
