@@ -5,8 +5,25 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
+
+
+/**
+ * Class handling connections
+ * 
+ * @author Harald & Stefan
+ * @since 2017-12-14
+ */
 public abstract class AbstractApiConnection {
 
+  
+  /**
+   * Opens and returns a connection to the specified apiUrl
+   * 
+   * @param apiUrl
+   * @param method
+   * @param pairs
+   * @return open connection
+   */
   public HttpURLConnection getConnection(String apiUrl, String method,
       List<RequestPropertyPair> pairs) {
     URL url;

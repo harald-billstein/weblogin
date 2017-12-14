@@ -22,7 +22,7 @@ import org.json.JSONObject;
 public class LoginWrapper extends AbstractApiConnection {
 
   /**
-   * Check if parameters are valid
+   * Check if parameters are valid and prepare user session
    * 
    * @param username passed too API
    * @param password passed to API
@@ -80,6 +80,14 @@ public class LoginWrapper extends AbstractApiConnection {
     FacesContext.getCurrentInstance().addMessage(null, facesMessage);
   }
 
+  
+  /**
+   * Validates user, grants access if token is valid
+   * 
+   * @param username
+   * @param token
+   * @return
+   */
   public HttpURLConnection validateUser(String username, String token) {
 
     String link = "http://localhost:8080/LoginApi/api/validate/" + username + "/" + token;

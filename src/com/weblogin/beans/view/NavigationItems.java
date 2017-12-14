@@ -26,7 +26,12 @@ public class NavigationItems {
   public NavigationItems() {
     context = FacesContext.getCurrentInstance();
   }
-
+  
+  /**
+   * Menu items shown on every page
+   * 
+   * @return 
+   */
   public List<Item> createDefaultItems() {
     List<Item> defaultItems = new ArrayList<>();
     defaultItems.add(new Item("Gallery", GALLARY_PATH));
@@ -34,6 +39,11 @@ public class NavigationItems {
     return defaultItems;
   }
 
+  /**
+   * Menu items shown on restricted pages
+   * 
+   * @return
+   */
   public List<Item> createLogedinItems() {
     List<Item> logedinItems = new ArrayList<>();
     context.getViewRoot().getId();
@@ -47,6 +57,10 @@ public class NavigationItems {
     return logedinItems;
   }
 
+  /**
+   * Menu items shown on all non restricted pages
+   * @return
+   */
   public List<Item> createLogedoutItems() {
     List<Item> logedoutItems = new ArrayList<>();
     String xhtmlPage = context.getViewRoot().getViewId();

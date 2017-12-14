@@ -1,5 +1,12 @@
 package com.weblogin.api;
 
+/**
+ * Holds a key value pair.
+ * 
+ * @author Harald & Stefan
+ * @since 2017-12-14
+ *
+ */
 public class RequestPropertyPair {
 
   private String key;
