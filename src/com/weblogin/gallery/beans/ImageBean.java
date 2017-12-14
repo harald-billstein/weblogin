@@ -3,7 +3,10 @@ package com.weblogin.gallery.beans;
 import java.io.Serializable;
 
 /**
- * Image pojo
+ * Image POJO
+ * Keeps path to image servlet and reference to image
+ * also keeps description of an image and a owner reference
+ *
  */
 public class ImageBean implements Serializable{
 
