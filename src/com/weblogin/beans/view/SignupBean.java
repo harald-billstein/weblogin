@@ -33,7 +33,7 @@ public class SignupBean {
 
 
   /**
-   * processes the signup request
+   * processes the sign-up request
    * 
    * @return URL
    */

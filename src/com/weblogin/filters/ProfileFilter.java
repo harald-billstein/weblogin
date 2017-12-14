@@ -14,6 +14,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.Response;
 import org.json.JSONObject;
 import com.weblogin.api.LoginWrapper;
 import com.weblogin.beans.view.ProfileBean;
@@ -55,10 +56,10 @@ public class ProfileFilter implements Filter {
       LoginWrapper loginWrapper = new LoginWrapper();
       connection = loginWrapper.validateUser(username, token);
 
-      if (connection.getResponseCode() == 200) {
+      if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
         BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
-        String output;
+        String output; 
         while ((output = br.readLine()) != null) {
           System.out.println("Response" + output);
           JSONObject jsonObj = new JSONObject(output);
