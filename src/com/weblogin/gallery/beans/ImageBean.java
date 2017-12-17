@@ -7,6 +7,10 @@ import java.io.Serializable;
  * Keeps path to image servlet and reference to image
  * also keeps description of an image and a owner reference
  *
+ * @author Stefan Lönn
+ * @author Harald Billstein
+ * @version 1.0
+ * @since 2017-12-06
  */
 public class ImageBean implements Serializable{
 
