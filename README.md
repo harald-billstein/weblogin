@@ -35,8 +35,8 @@ This repository is one of three repositories needed to launch the project. Clone
 
 * In Eclipse run all three modules in same TomEE server
 
-* In Intellij go to `run` then `edit configurations` under the `deployment` tab add both api's, then you need to set Application context
- weblogin to `/webLoginProject` *.war to `/WebRegisterAPI` *.war to `/LoginApi`
+* In Intellij go to `run` then `edit configurations` under the `deployment` tab add artifact(artifactName:war exploded) then add both api's (external sources), then you need to set Application context
+ weblogin to `/webLoginProject` webRegisterApi.war to `/WebRegisterAPI` webLoginApi.war to `/LoginApi`
  
 * Default Username: `admin`, Password `password`, remove when program is up and running.
 
