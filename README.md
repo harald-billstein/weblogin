@@ -48,14 +48,14 @@ Additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [MAVEN](https://maven.apache.org/) - Dependency Management
-* [JSF](http://www.oracle.com/technetwork/java/javaee/javaserverfaces-139869.html) - Server side user interfaces
-* [REST/JERSEY](https://jersey.github.io) - API communication
+* [MAVEN](https://maven.apache.org/) Compiler 3.7, war plugin 3.0 - Dependency Management
+* [JSF](http://www.oracle.com/technetwork/java/javaee/javaserverfaces-139869.html) 2.1 - Server side user interfaces
+* [REST/JERSEY](https://jersey.github.io) 2.0 - API communication
 * [GITHUB](https://github.com) - Version control
 * [MYSQL](https://www.mysql.com/) - Database 
 * [TOMEE](http://tomee.apache.org) - EE application server
 * [JNDI](http://www.oracle.com/technetwork/java/index-jsp-137536.html) - Database connection pool handling
-* [PRIMEFACES](https://www.primefaces.org) - Picture gallery handling and fileupload manager from Primefaces.org 
+* [PRIMEFACES](https://www.primefaces.org) Version 6.0 - Picture gallery handling and fileupload manager from Primefaces.org 
 * [FILTER](http://www.oracle.com/technetwork/java/filters-137243.html) - Filter
 * [SERVLET](https://docs.oracle.com/javaee/6/tutorial/doc/bnafd.html) - Servlets
 
