@@ -8,7 +8,8 @@ import javax.servlet.http.*;
 /**
  * Servlet that generates images from a database
  *
- * @author someone
+ * @author Stefan Lönn
+ * @author Harald Billstein
  * @version 1.0
  * @since 2017-12-06
  */

@@ -11,7 +11,8 @@ import javax.enterprise.context.ConversationScoped;
 import javax.inject.Named;
 
 /**
- * @author someone
+ * @author Stefan Lönn
+ * @author Harald Billstein
  * @version 1.0
  * @since 2017-12-06
  */
