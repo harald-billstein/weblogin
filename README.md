@@ -55,7 +55,7 @@ Additional notes about how to deploy this on a live system
 * [MYSQL](https://www.mysql.com/) - Database 
 * [TOMEE](http://tomee.apache.org) - EE application server
 * [JNDI](http://www.oracle.com/technetwork/java/index-jsp-137536.html) - Database connection pool handling
-* [PRIMEFACES](https://www.primefaces.org) - Picture gallery handling
+* [PRIMEFACES](https://www.primefaces.org) - Picture gallery handling and fileupload manager from Primefaces.org 
 * [FILTER](http://www.oracle.com/technetwork/java/filters-137243.html) - Filter
 * [SERVLET](https://docs.oracle.com/javaee/6/tutorial/doc/bnafd.html) - Servlets
 
